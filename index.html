@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Angelina ❤️</title>
+<style>
+body{margin:0;background:black;color:white;font-family:Arial,Helvetica,sans-serif;text-align:center;overflow-x:hidden}
+button{padding:20px 40px;font-size:26px;background:#ff2e93;border:none;color:white;border-radius:40px;cursor:pointer;box-shadow:0 0 25px #ff2e93;margin-top:40vh}
+#countdown{font-size:120px;margin-top:20vh;display:none;color:#ff2e93}
+#love{font-size:60px;display:none;color:#ff2e93;margin-top:25vh;animation:fade 2s}
+#gallery{display:none;margin-top:40px}
+.photo{opacity:0;transform:scale(.8);transition:1.5s;margin-bottom:50px}
+.photo.show{opacity:1;transform:scale(1)}
+img{width:300px;border-radius:20px;box-shadow:0 0 20px #ff2e93}
+.caption{font-size:22px;margin-bottom:15px;color:#ffc0e6}
+@keyframes fade{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
+.heart{position:fixed;top:-10px;color:#ff2e93;font-size:20px;animation:fall 5s linear infinite}
+@keyframes fall{to{transform:translateY(110vh)}}
+#heartContainer{display:none;margin-top:80px;justify-content:center;align-items:center;flex-wrap:wrap;width:320px;margin-left:auto;margin-right:auto}
+.heartPhoto{width:90px;height:90px;margin:5px;border-radius:15px;background-size:cover;background-position:center;opacity:0;transform:scale(.5);transition:1.5s;box-shadow:0 0 15px #ff2e93}
+.heartPhoto.show{opacity:1;transform:scale(1)}
+</style>
+</head>
+<body>
+<button onclick="start()">Нажми ❤️</button>
+<div id="countdown"></div>
+<div id="love">I love you Angelina ❤️</div>
+<div id="gallery">
+<div class="photo"><div class="caption">Мой любимый человек ❤️</div><img src="photo1.jpg"></div>
+<div class="photo"><div class="caption">Самая красивая девочка</div><img src="photo2.jpg"></div>
+<div class="photo"><div class="caption">Мой котик 🐱</div><img src="photo3.jpg"></div>
+<div class="photo"><div class="caption">Я очень скучаю по тебе</div><img src="photo4.jpg"></div>
+<div class="photo"><div class="caption">Скоро обниму тебя ❤️</div><img src="photo5.jpg"></div>
+</div>
+<div id="heartContainer">
+<div class="heartPhoto" style="background-image:url('photo1.jpg')"></div>
+<div class="heartPhoto" style="background-image:url('photo2.jpg')"></div>
+<div class="heartPhoto" style="background-image:url('photo3.jpg')"></div>
+<div class="heartPhoto" style="background-image:url('photo4.jpg')"></div>
+<div class="heartPhoto" style="background-image:url('photo5.jpg')"></div>
+<div class="heartPhoto" style="background-image:url('photo1.jpg')"></div>
+<div class="heartPhoto" style="background-image:url('photo2.jpg')"></div>
+<div class="heartPhoto" style="background-image:url('photo3.jpg')"></div>
+<div class="heartPhoto" style="background-image:url('photo4.jpg')"></div>
+</div>
+<audio id="music" src="music.mp3"></audio>
+<script>
+function start(){
+ document.querySelector("button").style.display="none";
+ let c=document.getElementById("countdown");
+ c.style.display="block";
+ let n=3;
+ let interval=setInterval(()=>{
+   c.innerText=n; n--;
+   if(n<0){
+     clearInterval(interval);
+     c.style.display="none";
+     document.getElementById("love").style.display="block";
+     setTimeout(()=>{
+       document.getElementById("love").style.display="none";
+       document.getElementById("gallery").style.display="block";
+       showPhotos();
+     },2500);
+   }
+ },1000);
+ document.getElementById("music").play().catch(()=>{});
+}
+function showPhotos(){
+ let photos=document.querySelectorAll(".photo");
+ photos.forEach((p,i)=>setTimeout(()=>p.classList.add("show"), i*3000));
+ setTimeout(()=>{
+   document.getElementById("heartContainer").style.display="flex";
+   showHeart();
+ }, photos.length*3000 + 1000);
+}
+function showHeart(){
+ let pieces=document.querySelectorAll(".heartPhoto");
+ pieces.forEach((p,i)=>setTimeout(()=>p.classList.add("show"), i*300));
+}
+setInterval(()=>{
+ let heart=document.createElement("div");
+ heart.className="heart";
+ heart.innerText="❤️";
+ heart.style.left=Math.random()*100+"vw";
+ heart.style.fontSize=Math.random()*20+10+"px";
+ document.body.appendChild(heart);
+ setTimeout(()=>heart.remove(),5000);
+},300);
+</script>
+</body>
+</html>

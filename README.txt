@@ -1,0 +1,1 @@
+Замени photo1.jpg-photo5.jpg и music.mp3 на свои файлы. Имена не меняй.
